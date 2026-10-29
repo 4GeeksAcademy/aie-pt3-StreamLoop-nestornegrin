@@ -1,23 +1,26 @@
-# Python Hello
+# StreamLoop · Ajuste del clasificador de cancelación (churn)
 
-The most basic boilerplate to start a Python project at 4Geeks is to start your very first Python project from scratch.
+Ajuste sistemático de hiperparámetros de un clasificador de churn para StreamLoop: línea base con valores por defecto,
+búsqueda amplia con `RandomizedSearchCV`, búsqueda focalizada con `GridSearchCV` y elección justificada del modelo final.
 
-## What to do next?
+## Resultado
 
-Open the `main.py` file and start writing your code.
+| | Línea base | Modelo ajustado |
+|---|---|---|
+| F2 (test) | 0,499 | **0,717** |
+| Cancelaciones detectadas | 178 de 374 | **295 de 374** |
 
-Execute your code by typing the following command on your terminal:
+## Archivos
+
+- [`churn_tuning.ipynb`](churn_tuning.ipynb): proceso completo, ejecutado y con salidas.
+- [`tuning_report.md`](tuning_report.md): informe para el tech lead (métrica, hiperparámetros, trade-off de estabilidad).
+- `requirements.txt`: dependencias con versiones fijadas.
+
+## Cómo reproducirlo
 
 ```bash
-$ python main.py
+pip install -r requirements.txt
+jupyter nbconvert --to notebook --execute --inplace churn_tuning.ipynb
 ```
 
-You can create and include as many python files (a.k.a. modules) as you want using the import statements.
-
-## Requirements
-
-Make sure you have Python installed in your computer. We strongly recommend [installing Python through Pyenv ](https://4geeks.com/how-to/what-is-pyenv-and-how-to-install-pyenv) to avoid version conflicts in the future.
-
-### Contributors
-
-This template was built as part of the [4Geeks Python Resources](https://4geeks.com/technology/python) for learning at [4Geeks.com](https://4geeks.com) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and [many other contributors](https://github.com/4GeeksAcademy/python-hello/graphs/contributors).
+El dataset se descarga automáticamente desde la URL pública de IBM. La ejecución completa tarda unos 7 minutos con 2 CPU.
